@@ -3,6 +3,7 @@ The goal of this project is to build a path planner that creates smooth, safe tr
 The car transmits its location, along with its sensor fusion data, which estimates the location of all the vehicles on the same side of the road.
 
 The car must not violate a set of motion constraints, namely maximum velocity, maximum acceleration, and maximum jerk, while also avoiding collisions with other vehicles, keeping to within a highway lane (aside from short periods of time while changing lanes), and changing lanes when doing so is necessary to maintain a speed near the posted speed limit.
+I have used the codes present in the the sdcnd and referred the open forum portals.
 
 # Implementation
 1. A proportional velocity control
@@ -136,3 +137,5 @@ The target velocity of the ego-vehicle is set depending on the state of the vehi
 * [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page). This is already part of the repo so you shouldn't have to worry about it.
 * Simulator. You can download these from the [releases tab](https://github.com/udacity/self-driving-car-sim/releases/tag/T3_v1.2).
 
+
+I have not committed 'Eigen-3.3' folder as the size is big.
