@@ -4,12 +4,12 @@ The car transmits its location, along with its sensor fusion data, which estimat
 
 The car must not violate a set of motion constraints, namely maximum velocity, maximum acceleration, and maximum jerk, while also avoiding collisions with other vehicles, keeping to within a highway lane (aside from short periods of time while changing lanes), and changing lanes when doing so is necessary to maintain a speed near the posted speed limit.
 
-## Implementation
+# Implementation
 1. A proportional velocity control
 2. Occupied lane avoidance logic
 3. Trajectory generation using a spline function
 
-# 1. A proportional velocity control
+## 1. A proportional velocity control
 The target velocity of the ego-vehicle is set depending on the state of the vehicle. If there is no vehicle ahead of the ego-vehicle, the target velocity is set to 49.5 mph, which is just below the speed limit. However, if the ego-vehicle is close to another vehicle ahead of it, it adjusts the target velocity to the vehicle ahead of it and keeps a safety distance between them. The acceleration of the ego-vehicle to achieved using a proportional controller, as in;
 
   vel_control.Init(0.005, 0.0, 0.0);
@@ -30,7 +30,7 @@ The target velocity of the ego-vehicle is set depending on the state of the vehi
             ref_vel += new_vel;
             
  
- # 2. Occupied lane avoidance logic
+ ## 2. Occupied lane avoidance logic
  The ego-vehicle is able to drive safely by avoiding occupied lanes on the left and on the right. At every time step, the logic checks for; (i) other cars ahead of the ego-car, (ii) cars in adjacent lanes, and (iii) safety space ahead of and behind the ego-vehicle. Hence, the ego-vehicle only changes lane if there are no cars within defined safety ranges ahead of and behind the ego-vehicle. The logic is shown in the code snippet below:
 // check which lanes are not free depending on the ego vehichle's lane
   if (lane==0)
@@ -74,7 +74,7 @@ The target velocity of the ego-vehicle is set depending on the state of the vehi
     
   
  
- # 3. Trajectory generation using a spline function
+ ## 3. Trajectory generation using a spline function
  After a desired lane of the ego-vehicle has been set, We create (x, y) coordinate of waypoints ahead of the ego-vehicle using the corresponding spaced (s,d) Frenet coordinates. From these waypoints, we use a spline function to generate evenly spaced points for a smooth trajectory towards a desired horizon. The car is expected to visit each of these points every 0.02 secs, so the number of the points are calculated by N = double N = (target_dist/(0.02*ref_vel/2.24)) in order to travel at the desired reference velocity. In the implementation, 6 waypoints were created and a horizon of 30 m was chosen to generate the desired trajectory. More detail is shown in the code snippet below,
  
  // create a spline
